@@ -18,6 +18,8 @@ variables:
 steps:
 - script: 
    echo $(modulePath)
+   cd /home/vsts/work/1/s
+   ls
 - task: GoTool@0
   inputs:
        version: '1.17'
@@ -38,11 +40,12 @@ steps:
 - script: |
     go version
     go mod init github.com/kalyani1217/go-projects
-    go get -v -t -d ./...
-    if [ -f Gopkg.toml ]; then
-        curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-        dep ensure
-    fi
+    
+    # go get -v -t -d ./...
+    # if [ -f Gopkg.toml ]; then
+    #     curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+    #     dep ensure
+    # fi
     # go build ./main.go
   workingDirectory: '$(modulePath)'
   displayName: 'Get dependencies, then build'
