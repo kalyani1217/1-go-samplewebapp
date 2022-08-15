@@ -1,19 +1,20 @@
-FROM golang:1.10
+FROM golang:latest as builder
 
 # Set the Current Working Directory inside the container
-WORKDIR $(system.defaultWorkingDirectory)
+WORKDIR /app
+COPY go.mod go.sum ./
+
 
 # Copy everything from the current directory to the PWD (Present Working Directory) inside the container
 COPY . .
-
+RUN go mod download
 # Download all the dependencies
-RUN go mod init system.defaultWorkingDirectory
+RUN go build -o main .
 
-# Install the package
-RUN go install -v ./...
-
+FROM gcr.io/distroless/base-debian11
+COPY --from=builder /app/main .
 # This container exposes port 8080 to the outside world
 EXPOSE 9001
 
 # Run the executable
-CMD ["src"]
+CMD ["/main"]
