@@ -5,6 +5,7 @@
 
 trigger:
 - project1
+- samplerepo/DevOps
 
 pool:
   vmImage: ubuntu-latest
@@ -38,3 +39,9 @@ steps:
     command: build
     workingDirectory: $(system.defaultWorkingDirectory)/src
 
+- task: Docker@2
+  inputs:
+    containerRegistry: 'ConnectToAzureCR'
+    repository: 'myfirstwebapp1217conatiner'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
