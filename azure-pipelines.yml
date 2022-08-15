@@ -34,7 +34,7 @@ steps:
 #   displayName: 'Get dependencies, then build'
 
 - script: |
-    'cd $(system.defaultWorkingDirectory)/src'
+    'cd $(system.defaultWorkingDirectory)'
     'ls'
  
 - task: Go@0
