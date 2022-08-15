@@ -30,7 +30,7 @@ steps:
 - script: |
     go version
     go mod init github.com/kalyani1217/go-projects
-  workingDirectory: /home/vsts/work/1/s
+  workingDirectory: /home/vsts/work/1/s/src
   displayName: 'Get dependencies, then build'
 
 - task: Go@0
