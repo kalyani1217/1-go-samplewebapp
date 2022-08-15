@@ -7,7 +7,7 @@ trigger:
 - project1
 
 pool:
-  vmImage: windows-latest
+  vmImage: ubuntu-latest
 
 variables:
   GOBIN:  '$(GOPATH)/bin' # Go binaries path
