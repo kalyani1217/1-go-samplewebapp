@@ -19,8 +19,8 @@ steps:
 - script: 
    echo $(modulePath)
 - bash: 
-    cd /home/vsts/work/1/s/src
-    ps
+    sudo cd /home/vsts/work/1/s/src
+    sudo ps
 - task: GoTool@0
   inputs:
        version: '1.17'
