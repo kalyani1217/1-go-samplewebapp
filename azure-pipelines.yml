@@ -41,6 +41,6 @@ steps:
     go version
     go mod init github.com/kalyani1217/go-projects
     
-    go build
-  workingDirectory: '/home/vsts/work/1/s/src'
+    go build ./src
   displayName: 'Get dependencies, then build'
+
