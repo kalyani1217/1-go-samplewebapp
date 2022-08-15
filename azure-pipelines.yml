@@ -27,11 +27,11 @@ steps:
        goBin: '$(GOPATH)/bin'
 
 
-- script: |
-    go version
-    go mod init github.com/kalyani1217/go-projects
-  workingDirectory: $(system.defaultWorkingDirectory)
-  displayName: 'Get dependencies, then build'
+# - script: |
+#     go version
+#     go mod init github.com/kalyani1217/go-projects
+#   workingDirectory: $(system.defaultWorkingDirectory)
+#   displayName: 'Get dependencies, then build'
 
 - task: Go@0
   inputs:
