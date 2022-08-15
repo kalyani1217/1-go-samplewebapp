@@ -1,0 +1,47 @@
+# Go
+# Build your Go project.
+# Add steps that test, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/go
+
+trigger:
+- project1
+- samplerepo/DevOps
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  GOBIN:  # Go binaries path
+  GOROOT: '/usr/local/go1.11' # Go installation path
+  GOPATH: '$(system.defaultWorkingDirectory)/gopath' # Go workspace path
+  modulePath: '$(GOPATH)/src/github.com/$(build.repository.name)' # Path to the module's code
+
+steps:
+- script: 
+   echo $(modulePath)
+- bash: 
+    ls -1 /home/vsts/work/1/s/src
+- task: GoTool@0
+  inputs:
+       version: '1.17'
+       goPath: '$(system.defaultWorkingDirectory)/gopath'
+       goBin: '$(GOPATH)/bin'
+
+
+# - script: |
+#     go version
+#     go mod init github.com/kalyani1217/go-projects
+#   workingDirectory: $(system.defaultWorkingDirectory)
+#   displayName: 'Get dependencies, then build'
+
+- task: Go@0
+  inputs:
+    command: build
+    workingDirectory: $(system.defaultWorkingDirectory)/src
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'ConnectToAzureCR'
+    repository: 'myfirstwebapp1217conatiner'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
