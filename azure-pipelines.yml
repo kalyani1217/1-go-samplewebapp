@@ -41,11 +41,6 @@ steps:
     go version
     go mod init github.com/kalyani1217/go-projects
     
-    # go get -v -t -d ./...
-    # if [ -f Gopkg.toml ]; then
-    #     curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-    #     dep ensure
-    # fi
-    go build ./main.go
+    go build
   workingDirectory: /home/vsts/work/1/s/src
   displayName: 'Get dependencies, then build'
