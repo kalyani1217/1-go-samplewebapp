@@ -33,10 +33,15 @@ steps:
 #   workingDirectory: $(system.defaultWorkingDirectory)
 #   displayName: 'Get dependencies, then build'
 
+- script: |
+    'cd $(system.defaultWorkingDirectory)/src'
+    'ls'
+ 
 - task: Go@0
   inputs:
     command: build
     workingDirectory: $(system.defaultWorkingDirectory)/src
+
 
 - task: Docker@2
   inputs:
