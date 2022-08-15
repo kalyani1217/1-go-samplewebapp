@@ -19,7 +19,6 @@ steps:
 - script: 
    echo $(modulePath)
 - bash: 
-    cd /home/vsts/work/1/s
     ls
 - task: GoTool@0
   inputs:
