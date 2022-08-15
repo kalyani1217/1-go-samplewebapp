@@ -18,8 +18,9 @@ variables:
 steps:
 - script: 
    echo $(modulePath)
-   cd /home/vsts/work/1/s
-   ls
+- bash: 
+    cd /home/vsts/work/1/s
+    ls
 - task: GoTool@0
   inputs:
        version: '1.17'
