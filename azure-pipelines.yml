@@ -36,5 +36,5 @@ steps:
 - task: Go@0
   inputs:
     command: build
-    workingDirectory: $(system.defaultWorkingDirectory)
+    workingDirectory: $(system.defaultWorkingDirectory)/src
 
