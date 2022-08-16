@@ -49,3 +49,4 @@ steps:
     repository: 'myfirstwebapp1217conatiner'
     command: 'buildAndPush'
     Dockerfile: '$(system.defaultWorkingDirectory)/src/Dockerfile'
+    
