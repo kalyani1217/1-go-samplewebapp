@@ -23,9 +23,7 @@ steps:
        goPath: '$(system.defaultWorkingDirectory)/gopath'
        goBin: '$(GOPATH)/bin'
 
-- script: |
-    'cd $(system.defaultWorkingDirectory)'
-    'ls'
+
  
 - task: Go@0
   inputs:
