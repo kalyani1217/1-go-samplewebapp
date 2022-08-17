@@ -23,12 +23,10 @@ steps:
        goPath: '$(system.defaultWorkingDirectory)/gopath'
        goBin: '$(GOPATH)/bin'
 
-
- 
 - task: Go@0
   inputs:
     command: build
-    workingDirectory: $(system.defaultWorkingDirectory)/src
+    workingDirectory: ./src
 
 
 - task: Docker@2
@@ -36,5 +34,5 @@ steps:
     containerRegistry: 'ConnectToAzureCR'
     repository: 'myfirstwebapp1217conatiner'
     command: 'buildAndPush'
-    Dockerfile: '$(system.defaultWorkingDirectory)/Dockerfile'
+    Dockerfile: './Dockerfile'
     
