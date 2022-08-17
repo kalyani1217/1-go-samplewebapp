@@ -22,7 +22,9 @@ steps:
        version: '1.17'
        goPath: '$(system.defaultWorkingDirectory)/gopath'
        goBin: '$(GOPATH)/bin'
-
+- script: |
+     echo $(system.defaultWorkingDirectory)
+     cd $(system.defaultWorkingDirectory) && cd ls
 - task: Go@0
   inputs:
     command: build
