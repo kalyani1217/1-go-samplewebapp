@@ -7,7 +7,7 @@ trigger:
 - project1
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: windows-latest
 
 variables:
   GOBIN:  # Go binaries path
@@ -26,13 +26,6 @@ steps:
        goPath: '$(system.defaultWorkingDirectory)/gopath'
        goBin: '$(GOPATH)/bin'
 
-
-# - script: |
-#     go version
-#     go mod init github.com/kalyani1217/go-projects
-#   workingDirectory: $(system.defaultWorkingDirectory)
-#   displayName: 'Get dependencies, then build'
-
 - script: |
     'cd $(system.defaultWorkingDirectory)'
     'ls'
@@ -48,5 +41,5 @@ steps:
     containerRegistry: 'ConnectToAzureCR'
     repository: 'myfirstwebapp1217conatiner'
     command: 'buildAndPush'
-    Dockerfile: '$(system.defaultWorkingDirectory)/src/Dockerfile'
+    Dockerfile: '$(system.defaultWorkingDirectory)/Dockerfile'
     
