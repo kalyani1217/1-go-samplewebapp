@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "golangcluster-2e98"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "golangcluster-2e98"
+  template:
+    metadata:
+      labels:
+        app: "golangcluster-2e98"
+    spec:
+      containers:
+        - name: "golangcluster-2e98"
+          image: "golangcr.azurecr.io/golangcluster"
+          ports:
+          - containerPort: 9001
