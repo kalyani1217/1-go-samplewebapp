@@ -1,0 +1,50 @@
+on: [push]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    
+    - uses: azure/docker-login@v1
+      with:
+        login-server: golangcr.azurecr.io
+        username: ${{ secrets.acr_golangcr_username }}
+        password: ${{ secrets.acr_golangcr_password }}
+    
+    - name: Build and push image to ACR
+      id: build-image
+      run: |
+        docker build "$GITHUB_WORKSPACE/" -f  "dockerfile" -t golangcr.azurecr.io/golangcluster:${{ github.sha }} --label dockerfile-path=dockerfile
+        docker push golangcr.azurecr.io/golangcluster:${{ github.sha }}
+    
+    - uses: azure/k8s-set-context@v1
+      with:
+         kubeconfig: ${{ secrets.aks_golangcluster_kubeConfig }}
+      id: login
+    
+    - name: Create namespace
+      run: |
+        namespacePresent=`kubectl get namespace | grep golangclusterb772 | wc -l`
+        if [ $namespacePresent -eq 0 ]
+        then
+            echo `kubectl create namespace golangclusterb772`
+        fi
+
+    - uses: azure/k8s-create-secret@v1
+      with:
+        namespace: golangclusterb772
+        container-registry-url: golangcr.azurecr.io
+        container-registry-username: ${{ secrets.acr_golangcr_username }}
+        container-registry-password: ${{ secrets.acr_golangcr_password }}
+        secret-name: golangclustedockerauth
+       
+    - uses: azure/k8s-deploy@v1.2
+      with:
+        namespace: golangclusterb772
+        manifests: |
+          manifests/deployment.yml
+          manifests/service.yml
+        images: |
+          golangcr.azurecr.io/golangcluster:${{ github.sha }}
+        imagepullsecrets: |
+          golangclustedockerauth
